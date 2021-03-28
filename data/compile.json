@@ -1,0 +1,12 @@
+{
+	"images": {
+		"quality": 80,
+		"width": 1024,
+		"fit": "contain"
+	},
+	"thumbnails": {
+		"quality": 50,
+		"width": 320,
+		"fit": "cover"
+	}
+}

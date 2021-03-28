@@ -1,0 +1,27 @@
+{
+  "name": "node-static-site",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StuffJackMakes/Node-Static-Site.git"
+  },
+  "author": "https://stuffjackmakes.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/StuffJackMakes/Node-Static-Site/issues"
+  },
+  "homepage": "https://github.com/StuffJackMakes/Node-Static-Site#readme",
+  "dependencies": {
+    "@node-minify/core": "^6.2.0",
+    "@node-minify/html-minifier": "^6.2.0",
+    "glob": "^7.1.6",
+    "nunjucks": "^3.2.3",
+    "sass": "^1.32.8",
+    "sharp": "^0.27.2",
+    "svgo": "^2.2.2",
+    "webpack": "^5.27.2"
+  }
+}

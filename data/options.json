@@ -1,0 +1,10 @@
+{
+	"optimize_images": true,
+	"shrink_images": false,
+	"create_thumbnails": false,
+	"minify_html": true,
+	"minify_css": true,
+	"minify_js": true,
+	"create_js_map": true,
+	"optimize_svg": true
+}

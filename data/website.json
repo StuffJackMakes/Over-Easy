@@ -1,0 +1,11 @@
+{
+	"options": "** NOTE: This is a reserved keyword that will be replaced with the contents of `data/options.json` **",
+	"title": "Node Static Site Page",
+	"author": {
+		"name": "Anonymous",
+		"website": "http://http://example.com",
+		"github": "https://github.com"
+	},
+	"description": "The base website - from here the possibilities are endless!",
+	"keywords": "node, static, site"
+}
