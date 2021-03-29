@@ -1,5 +1,4 @@
 {
-	"optimize_images": true,
 	"shrink_images": false,
 	"create_thumbnails": false,
 	"minify_html": true,

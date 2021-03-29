@@ -64,9 +64,6 @@ Then go to http://localhost:8080 in your web browser.
 
 Editing the [options.json](data/options.json) file will change what happens during the build process.
 
-#### optimize_images
-If `true` images will be converted to `jpg`. Required for `shrink_images` to work.
-
 #### shrink_images
 If `true` images that are too wide will be resized to be smaller. See the [Custom *Custom* Build Settings](###Custom-*Custom*-Build-Settings) section for details.
 
@@ -107,7 +104,7 @@ Editing the [compile.json](data/compile.json) file will change deails of certain
 
 ### Helper Templates
 
-#### [img.html](assts/html/helper/img.html)
+#### [img.html](assts/html/helpers/img.html)
 Displays an image as `webp` with a `jpg` fallback. Inputs:
 * `src`: The image path (excluding `img/`) without the extension.
 * `alt`: Optional alternate text.

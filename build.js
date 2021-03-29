@@ -196,43 +196,39 @@ async function ReformatImages() {
 						width: compileParams.thumbnails.width,
 						fit: compileParams.thumbnails.fit
 					})
-					.webp("jpg", { quality: compileParams.thumbnails.quality })
+					.webp({ quality: compileParams.thumbnails.quality })
 					.toFile(outWebp);
 			}
 
-			if (options.optimize_images) {
-				outWebP	= outFile.substring(0, outFile.lastIndexOf(".")) + ".webp";			
-				outFile = outFile.substring(0, outFile.lastIndexOf(".")) + ".jpg";
+			outWebP	= outFile.substring(0, outFile.lastIndexOf(".")) + ".webp";
+			outFile = outFile.substring(0, outFile.lastIndexOf(".")) + ".jpg";
 
-				if (options.shrink_images) {
-					sharp(file)
-						.withoutEnlargement()
-						.resize({
-							width: compileParams.images.width,
-							fit: compileParams.images.fit
-						})
-						.toFormat("jpg", { quality: compileParams.images.quality })
-						.toFile(outFile);
-					
-					sharp(file)
-						.withoutEnlargement()
-						.resize({
-							width: compileParams.images.width,
-							fit: compileParams.images.fit
-						})
-						.webp({ quality: compileParams.images.quality })
-						.toFile(outWebP);
-				} else {
-					sharp(file)
-						.toFormat("jpg", { quality: compileParams.images.quality })
-						.toFile(outFile);
-					
-					sharp(file)
-						.webp({ quality: compileParams.images.quality })
-						.toFile(outWebP);
-				}
+			if (options.shrink_images) {
+				sharp(file)
+					.withoutEnlargement()
+					.resize({
+						width: compileParams.images.width,
+						fit: compileParams.images.fit
+					})
+					.toFormat("jpg", { quality: compileParams.images.quality })
+					.toFile(outFile);
+
+				sharp(file)
+					.withoutEnlargement()
+					.resize({
+						width: compileParams.images.width,
+						fit: compileParams.images.fit
+					})
+					.webp({ quality: compileParams.images.quality })
+					.toFile(outWebP);
 			} else {
-				fs.copyFileSync(file, outFile);
+				sharp(file)
+					.toFormat("jpg", { quality: compileParams.images.quality })
+					.toFile(outFile);
+
+				sharp(file)
+					.webp({ quality: compileParams.images.quality })
+					.toFile(outWebP);
 			}
 		});
 	});
