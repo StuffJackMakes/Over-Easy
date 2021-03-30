@@ -62,26 +62,13 @@ Then go to http://localhost:8080 in your web browser.
 
 Editing the [options.json](data/options.json) file will change what happens during the build process.
 
-##### shrink_images
-If `true` images that are too wide will be resized to be smaller. See the [Custom *Custom* Build Settings](###Custom-*Custom*-Build-Settings) section for details.
-
-##### create_thumbnails
-If `true` create smaller `jpg` versions of all image files. These files will have the same path and name, but with `_thumb.jpg` replacing the original file extension.
-
-##### minify_html
-If `true` minify html files.
-
-##### minify_css
-If `true` minify CSS.
-
-##### minify_js
-If `true` minify Javascript.
-
-##### create_js_map
-If `true` create a [source map](https://en.wikipedia.org/wiki/Minification_(programming)#Source_mapping) for the Javascript.
-
-##### optimize_svg
-If `true` run svg files through the [svgo](https://github.com/svg/svgo) optimizer.
+* `shrink_images`: If `true` images that are too wide will be resized to be smaller. See the [Custom *Custom* Build Settings](###Custom-*Custom*-Build-Settings) section for details.
+* `create_thumbnails`: If `true` create smaller `jpg` versions of all image files. These files will have the same path and name, but with `_thumb.jpg` replacing the original file extension.
+* `minify_html`: If `true` minify html files.
+* `minify_css`: If `true` minify CSS.
+* `minify_js`:  If `true` minify Javascript.
+* `create_js_map`: If `true` create a [source map](https://en.wikipedia.org/wiki/Minification_(programming)#Source_mapping) for the Javascript.
+* `optimize_svg`: If `true` run svg files through the [svgo](https://github.com/svg/svgo) optimizer.
 
 ---
 
