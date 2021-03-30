@@ -108,13 +108,24 @@ The templating engine used is [nunjucks](https://mozilla.github.io/nunjucks), th
 * `options`: The contents of (data/options.json)[data/options.json].
 * `images`: A dictionary with keys being all paths under the (assets/img)[assets/img] folder, starting with 'img' and values being an array of all images under that path (without the filename extension).
 
-#### Helper Partials
-Several helper templates have been pre-defined to make life easier.
+#### Helper Macros
+Several helper macros have been pre-defined to make life easier. To use them in a template, you must [import](https://mozilla.github.io/nunjucks/templating.html#import) the (util.html)[assets/html/macros/util/html] file into your template. For example: `{% import "../macros/util.html" as util %}`.
 
-##### [img.html](assts/html/helpers/img.html)
-Displays an image as `webp` with a `jpg` fallback. Inputs:
+##### img
+Displays an image as `webp` with a `jpg` fallback, or as a regular image if it is an `avg`. Inputs:
 * `src`: The image path (excluding `img/`) without the filename extension.
 * `alt`: Optional alternate text.
+```html
+{{ util.img("my_image.png", "Here's my image!") }}
+```
+
+#### Custom Functions
+
+##### stripExtension
+Strips the file extension from a string.
+```html
+{{ "my_file.png" | stripExtension }} <!-- Outputs "my_file" -->
+```
 
 ---
 

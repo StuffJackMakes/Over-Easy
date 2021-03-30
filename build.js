@@ -19,7 +19,7 @@ async function Build() {
 	try {
 		CleanOutputDirectory();
 		CreateOutputDirectory();
-		await PopulateParamaters();
+		await PopulateParameters();
 		await CompileSass();
 		err = await BundleJs();
 		if (err) throw err;
@@ -129,7 +129,8 @@ async function BundleJs() {
 		output: {
 			path: JS_OUTPUT,
 			filename: "bundle.js"
-		}
+		},
+		mode: "development"
 	};
 
 	if (options.minify_js) options.mode = "production";
@@ -269,7 +270,7 @@ async function OptimizeSvg() {
 
 
 // ===== Populate Website Parameters =====
-async function PopulateParamaters() {
+async function PopulateParameters() {
 	console.log("Populating Parameters...")
 
 	const IMAGE_SOURCE = path.join(INPUT_FOLDER, "img");
@@ -279,12 +280,14 @@ async function PopulateParamaters() {
 	websiteParams.images = {};
 
 	let remainingFolders = [IMAGE_SOURCE];
-	let folder;
+	let folder,
+		trimmedFolder;
 	while (remainingFolders.length > 0) {
 		folder = remainingFolders.pop();
-		websiteParams.images[folder] = [];
+		trimmedFolder = folder.substring(folder.indexOf("img"));
+		websiteParams.images[trimmedFolder] = [];
 		for (let img of GetFilesInPath(folder)) {
-			websiteParams.images[folder].push(img.substring(0, img.lastIndexOf(".")));
+			websiteParams.images[trimmedFolder].push(path.join(trimmedFolder, img));
 		}
 		Array.prototype.push.apply(remainingFolders, GetFoldersInPath(folder));
 	}
@@ -311,6 +314,11 @@ async function CompileHtml() {
 	const htmlMinifier = require("@node-minify/html-minifier");
 	const HTML_FOLDER = path.join(INPUT_FOLDER, "html", "pages");
 	const HTML_TEMPLATES = path.join(HTML_FOLDER, "**", "*.+(ejs|html)");
+
+	let env = nunjucks.configure();
+	env.addFilter("stripExtension", (str) => {
+		return str.substring(0, str.lastIndexOf("."));
+	});
 
 	glob(HTML_TEMPLATES, {}, (err, files) => {
 		if (err) throw err;

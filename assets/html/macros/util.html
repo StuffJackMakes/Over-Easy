@@ -1,0 +1,11 @@
+{% macro img(src, alt="") %}
+{% if '.svg' in src %}
+<img src="{{ src }}" alt="{{ alt }}" loading="lazy">
+{% else %}
+<picture>
+  <source srcset="{{ src | stripExtension }}.webp" type="image/webp">
+  <source srcset="{{ src | stripExtension }}.jpg" type="image/jpeg"> 
+  <img src="{{ src | stripExtension }}.jpg" alt="{{ alt }}">
+</picture>
+{% endif %}
+{% endmacro %}

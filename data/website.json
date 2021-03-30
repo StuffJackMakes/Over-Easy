@@ -1,12 +1,12 @@
 {
 	"options": "<RESERVED>",
 	"images": "<RESERVED",
-	"title": "Node Static Site Page",
+	"title": "Over Easy Static Site",
 	"author": {
 		"name": "Anonymous",
 		"website": "http://http://example.com",
 		"github": "https://github.com"
 	},
-	"description": "The base website - from here the possibilities are endless!",
+	"description": "A blank website. From here the possibilities are endless!",
 	"keywords": "node, static, site"
 }
