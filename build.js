@@ -4,6 +4,7 @@ const path = require("path");
 const glob = require("glob");
 const compileParams = require("./data/compile.json");
 const options = require("./data/options.json");
+let websiteParams = require("./data/website.json");
 
 
 // ===== Generally-Used Variables =====
@@ -18,6 +19,7 @@ async function Build() {
 	try {
 		CleanOutputDirectory();
 		CreateOutputDirectory();
+		await PopulateParamaters();
 		await CompileSass();
 		err = await BundleJs();
 		if (err) throw err;
@@ -266,18 +268,49 @@ async function OptimizeSvg() {
 
 
 
+// ===== Populate Website Parameters =====
+async function PopulateParamaters() {
+	console.log("Populating Parameters...")
+
+	const IMAGE_SOURCE = path.join(INPUT_FOLDER, "img");
+
+	websiteParams.options = options;
+
+	websiteParams.images = {};
+
+	let remainingFolders = [IMAGE_SOURCE];
+	let folder;
+	while (remainingFolders.length > 0) {
+		folder = remainingFolders.pop();
+		websiteParams.images[folder] = [];
+		for (let img of GetFilesInPath(folder)) {
+			websiteParams.images[folder].push(img.substring(0, img.lastIndexOf(".")));
+		}
+		Array.prototype.push.apply(remainingFolders, GetFoldersInPath(folder));
+	}
+}
+function GetFilesInPath(directory) {
+	let allFiles = [];
+	let files = fs.readdirSync(directory);
+	files.forEach(file => {
+		if (!fs.lstatSync(path.resolve(directory, file)).isDirectory() && file.indexOf(".") !== 0) {
+			allFiles.push(file);
+		}
+	});
+	return allFiles;
+}
+
+
+
 // ===== Compile HTML =====
 async function CompileHtml() {
-	console.log("Compiling HTML...")
+	console.log("Compiling HTML...");
 
-	let websiteParams = require("./data/website.json");
 	const nunjucks = require("nunjucks");
 	const minify = require("@node-minify/core");
 	const htmlMinifier = require("@node-minify/html-minifier");
 	const HTML_FOLDER = path.join(INPUT_FOLDER, "html", "pages");
 	const HTML_TEMPLATES = path.join(HTML_FOLDER, "**", "*.+(ejs|html)");
-
-	websiteParams.options = options;
 
 	glob(HTML_TEMPLATES, {}, (err, files) => {
 		if (err) throw err;
@@ -302,6 +335,4 @@ async function CompileHtml() {
 			}
 		});
 	});
-
-
 }

@@ -1,5 +1,6 @@
 {
-	"options": "** NOTE: This is a reserved keyword that will be replaced with the contents of `data/options.json` **",
+	"options": "<RESERVED>",
+	"images": "<RESERVED",
 	"title": "Node Static Site Page",
 	"author": {
 		"name": "Anonymous",
