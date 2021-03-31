@@ -130,6 +130,7 @@ async function BundleJs() {
 			path: JS_OUTPUT,
 			filename: "bundle.js"
 		},
+		devtool: false,
 		mode: "development"
 	};
 
