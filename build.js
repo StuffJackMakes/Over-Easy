@@ -165,6 +165,7 @@ async function ReformatImages() {
 	const sharp = require("sharp");
 	const IMAGE_INPUT_GLOB = path.join(INPUT_FOLDER, "img", "**", "*.+(jpg|jpeg|png|gif|tif|tiff)");
 	const IMAGE_OUTPUT = path.join(OUTPUT_FOLDER, "img");
+	const skipFiles = ["favicon.png", "apple-touch-icon.png"];
 
 	glob(IMAGE_INPUT_GLOB, {}, (err, files) => {
 		if (err) throw err;
@@ -176,7 +177,7 @@ async function ReformatImages() {
 
 		files.forEach(file => {
 			outFile = path.join(OUTPUT_FOLDER, file.substring(INPUT_FOLDER.length));
-			if (file.indexOf("favicon.png") != -1) {
+			if (skipFiles.indexOf(file.substring(file.lastIndexOf("/") + 1)) !== -1) {
 				fs.copyFileSync(file, outFile);
 				return;
 			}
@@ -319,6 +320,9 @@ async function CompileHtml() {
 	let env = nunjucks.configure();
 	env.addFilter("stripExtension", (str) => {
 		return str.substring(0, str.lastIndexOf("."));
+	});
+	env.addFilter("filename", (str) => {
+		return str.substring(str.lastIndexOf("/")+1);
 	});
 
 	glob(HTML_TEMPLATES, {}, (err, files) => {

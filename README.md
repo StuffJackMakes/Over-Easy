@@ -1,6 +1,6 @@
 # Over Easy
 
-<img src="./Over-Easy-logo.svg" width="160" height="160" alt="sharp logo" align="right">
+<img src="./Over-Easy-logo.svg" width="160" height="160" alt="Over Easy logo" align="right">
 
 A base project for static sites with templating and compression right out of the box.
 
@@ -112,6 +112,12 @@ Displays an image as `webp` with a `jpg` fallback, or as a regular image if it i
 Strips the file extension from a string.
 ```html
 {{ "my_file.png" | stripExtension }} <!-- Outputs "my_file" -->
+```
+
+##### filename
+Returns the filename within a string.
+```html
+{{ "path/to/my_file.png" | filename }} <!-- Outputs "my_file.png" -->
 ```
 
 ---
